@@ -33,9 +33,28 @@ while True:
         print("검색어를 입력해주세요.")
         continue
 
-    # 쿼리와 유사한 상품 5개 검색
+    # 필터링 옵션 입력 받기
+    filter_option = input("필터링을 사용하시겠습니까? (y/n): ").strip().lower()
+    filter_dict = None
+    
+    if filter_option == 'y':
+        print("\n필터링 옵션:")
+        print("1. 상품번호로 필터링")
+        print("2. 카테고리로 필터링")
+        filter_choice = input("선택하세요 (1/2): ").strip()
+        
+        if filter_choice == '1':
+            goods_no = input("상품번호를 입력하세요: ").strip()
+            filter_dict = {"GOODS_NO": goods_no}
+        elif filter_choice == '2':
+            category = input("카테고리를 입력하세요: ").strip()
+            filter_dict = {"CATEGORY": category}
+
+    # 쿼리와 유사한 상품 5개 검색 (필터 적용)
     results_with_score = vectorstore.similarity_search_with_score(
-        query=query, k=5  # 반환할 결과 수
+        query=query, 
+        k=5,  # 반환할 결과 수
+        filter=filter_dict  # 메타데이터 필터 적용
     )
 
     # 결과 출력
@@ -46,7 +65,7 @@ while True:
         for i, (doc, score) in enumerate(results_with_score, 1):
             print(f"[결과 {i}] score: {score}") # 낮을수록 더 유사함
             print(f"상품정보: {doc.page_content}")
-            # print(f"상품번호: {doc.metadata['GOODS_NO']}")
+            print(f"메타데이터: {doc.metadata}")  # 모든 메타데이터 출력
             print("-" * 60)
     else:
         print("검색 결과가 없습니다.")

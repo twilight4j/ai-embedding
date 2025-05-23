@@ -18,6 +18,7 @@ langchain-community = "0.*"
 langchain-openai = "0.*"
 langchain-elasticsearch = "0.*"
 langchain-chroma = "0.*"
+langchain-teddynote = "0.*"
 langchainhub = "0.*"
 langgraph = "0.*"
 langsmith = "0.*"
@@ -35,7 +36,10 @@ jupyter = "1.*"
 notebook = "7.*"
 
 # 딥러닝 및 머신러닝 관련 패키지
+torch = "2.*"
+torchvision = "0.*"
 faiss-cpu = "1.*"
+open-clip-torch = "2.*"
 
 # 기타 유틸리티 및 필수 패키지
 python-dotenv = "1.*"
