@@ -1,2 +1,4 @@
 .env
-.db
+.db/faiss
+.db/oracle
+data
